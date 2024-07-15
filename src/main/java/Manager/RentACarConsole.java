@@ -5,7 +5,6 @@ import Vehicle.Manager.VehicleManager;
 import Vehicle.PassengerVehicle;
 import Vehicle.Vehicle;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class RentACarConsole {
@@ -27,13 +26,13 @@ public class RentACarConsole {
                     addVehicle();
                     break;
                 case 2:
-                    listVehicles();
+                    findVehicle();
                     break;
                 case 3:
                     showBills();
                     break;
                 case 4:
-                    showAllVehicles();
+                    listVehicles();
                     break;
                 case 5:
                     running = false;
@@ -50,7 +49,7 @@ public class RentACarConsole {
     private void displayMenu() {
         System.out.println("\n--- Rent-a-Car BriefDrive Menu ---");
         System.out.println("1. Add Vehicle");
-        System.out.println("2. List Vehicles");
+        System.out.println("2. Find vehicle");
         System.out.println("3. Show Bills");
         System.out.println("4. show all vehicles");
         System.out.println("5. Exit");
@@ -162,6 +161,7 @@ public class RentACarConsole {
             }
         }
     }
+
     private void listVehicles() {
         System.out.println("\n--- List of Vehicles ---");
         manager.listVehicles();
@@ -182,9 +182,16 @@ public class RentACarConsole {
         }
     }
 
-    private void showAllVehicles() {
-        System.out.println("\n--- Show All Vehicles ---");
+    private void findVehicle() {
+        System.out.println("\n--- Find vehicle ---");
 
-       manager.listVehicles();
+        System.out.print("Enter license plate: ");
+        String licensePlate = scanner.nextLine();
+        Vehicle vehicle = manager.findVehicleByLicensePlate(licensePlate);
+        if (vehicle != null) {
+            vehicle.displayData();
+        } else {
+            System.out.println("Vehicle not found.");
+        }
     }
 }
